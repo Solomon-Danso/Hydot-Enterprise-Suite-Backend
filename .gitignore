@@ -1,0 +1,52 @@
+# Ignore build output directories
+/target/
+/out/
+
+# Ignore IDE-specific files
+/.idea/
+/*.iml
+
+# Ignore Maven specific files
+.mvn/
+log/
+!src/main/resources/
+/src/main/resources/*.properties
+/src/main/resources/*.yml
+/src/main/resources/*.yaml
+
+# Logs and temp files
+*.log
+*.tmp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore Java-specific files
+*.class
+*.jar
+*.war
+*.ear
+
+# Ignore dependency caching files
+/.m2/repository/
+/*.bat
+/*.cmd
+
+# Ignore test reports
+/test-output/
+/surefire-reports/
+/test-results/
+
+# Ignore Lombok generated files
+/.lombok/
+
+# Ignore other IDE specific folders (if used)
+.vscode/
+.gradle/
+.project
+.classpath
+
+# Ignore local environment files
+.env
+.idea/workspace.xml
