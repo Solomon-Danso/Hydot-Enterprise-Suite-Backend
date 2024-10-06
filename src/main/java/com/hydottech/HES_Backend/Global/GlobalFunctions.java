@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class GlobalFunctions {
     public static String saveFile(MultipartFile file) {
-        String uploadDirectory = "/Users/glydetek/Desktop/HydotTech/Products/HES/HES_Backend/src/main/resources/static/uploads"; // Ensure there's a trailing slash
+        String uploadDirectory = "/Users/glydetek/Desktop/HydotTech/Products/HES/HES_Backend/src/main/resources/static"; // Ensure there's a trailing slash
         String originalFilename = file.getOriginalFilename();
 
         if (originalFilename == null) {
@@ -36,7 +36,8 @@ public class GlobalFunctions {
             throw new RuntimeException("Failed to save file: " + e.getMessage(), e);
         }
 
-        return destinationFile.getPath(); // Return the path of the saved file
+       // return destinationFile.getPath(); // Return the path of the saved file
+        return uniqueFileName;
     }
 
 
