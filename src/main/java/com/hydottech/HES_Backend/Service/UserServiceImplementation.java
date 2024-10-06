@@ -15,4 +15,10 @@ public class UserServiceImplementation implements  UserServiceInterface{
     public Users registerUser(Users users) {
         return userRepo.save(users);
     }
+
+    @Override
+    public boolean UserIdExists(String generatedUserId) {
+        return userRepo.existsByUserId(generatedUserId);  // Ensure this references the correct camelCase field
+    }
+
 }

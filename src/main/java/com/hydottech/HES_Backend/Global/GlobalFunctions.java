@@ -4,9 +4,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Random;
 import java.util.UUID;
+import java.time.Year;
 
 public class GlobalFunctions {
+
 
     public static String saveFile(MultipartFile file) {
         String uploadDirectory = "/Users/glydetek/Desktop/HydotTech/Products/HES/HES_Backend/Uploads/"; // Ensure there's a trailing slash
@@ -48,6 +52,31 @@ public class GlobalFunctions {
         // Return the unique file name
         return uniqueFileName;
     }
+
+
+    public static String IdGenerator(String institutionCode) {
+        // Get the current year and take the last 2 digits
+        String year = String.valueOf(Year.now().getValue()).substring(2);
+
+        // Generate a random 3-digit number
+        Random random = new Random();
+        String randomDigits = String.format("%04d", random.nextInt(9999));
+
+        // Combine institution code, year, and random digits
+        return institutionCode + year + randomDigits;
+    }
+
+    public static String PasswordGenerator() {
+        Random random = new Random();
+        String randomDigits = String.format("%08d", random.nextInt(99999999));
+        return  randomDigits;
+    }
+
+
+
+
+
+
 
 
 

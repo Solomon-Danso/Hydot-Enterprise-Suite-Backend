@@ -4,4 +4,6 @@ import com.hydottech.HES_Backend.Entity.Users;
 
 public interface UserServiceInterface {
     Users registerUser(Users users);
+
+    boolean UserIdExists(String generatedUserId);
 }
