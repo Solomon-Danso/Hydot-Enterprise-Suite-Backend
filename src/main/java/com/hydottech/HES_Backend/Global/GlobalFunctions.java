@@ -7,16 +7,25 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class GlobalFunctions {
+
     public static String saveFile(MultipartFile file) {
-        String uploadDirectory = "/Users/glydetek/Desktop/HydotTech/Products/HES/HES_Backend/src/main/resources/static"; // Ensure there's a trailing slash
+        String uploadDirectory = "/Users/glydetek/Desktop/HydotTech/Products/HES/HES_Backend/Uploads/"; // Ensure there's a trailing slash
         String originalFilename = file.getOriginalFilename();
 
         if (originalFilename == null) {
             throw new IllegalArgumentException("File name cannot be null");
         }
 
-        // Add a UUID to the file name to avoid collisions
-        String uniqueFileName = UUID.randomUUID().toString() + "_" + originalFilename;
+        // Extract the file extension from the original file name
+        String fileExtension = "";
+        int dotIndex = originalFilename.lastIndexOf('.');
+        if (dotIndex >= 0) {
+            fileExtension = originalFilename.substring(dotIndex);
+        }
+
+        // Add a UUID to the file name to avoid collisions, and append the file extension
+        String uniqueFileName = UUID.randomUUID().toString() + fileExtension;
+
         File uploadDir = new File(uploadDirectory);
 
         // Ensure the upload directory exists
@@ -36,9 +45,10 @@ public class GlobalFunctions {
             throw new RuntimeException("Failed to save file: " + e.getMessage(), e);
         }
 
-       // return destinationFile.getPath(); // Return the path of the saved file
+        // Return the unique file name
         return uniqueFileName;
     }
+
 
 
 }

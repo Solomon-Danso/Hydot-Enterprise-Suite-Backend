@@ -9,8 +9,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // Map URL path to the upload directory on the file system
+        // Map the URL pattern /uploads/** to the new upload directory on the file system
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:src/main/resources/static");
+                .addResourceLocations("file:/Users/glydetek/Desktop/HydotTech/Products/HES/HES_Backend/Uploads/");
     }
 }

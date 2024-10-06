@@ -23,16 +23,23 @@ public class UsersController {
 
 
     @PostMapping("/Register")
-    public ResponseEntity<Map<String, Object>> registerUser(@ModelAttribute Users users, @RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Map<String, Object>> registerUser(@ModelAttribute Users users,
+                                                            @RequestParam("pic") MultipartFile pic,
+                                                            @RequestParam("vid") MultipartFile vid) {
         Map<String, Object> response = new HashMap<>();
 
         // Check if the file is not empty
-        if (!file.isEmpty()) {
-            String fileName = GlobalFunctions.saveFile(file);
+        if (!pic.isEmpty()) {
+            String fileName = GlobalFunctions.saveFile(pic);
             users.setPicture(fileName); // Save the file path in the Picture column
         }
 
-         userServiceInterface.registerUser(users);
+//        if (!vid.isEmpty()) {
+//            String fileName = GlobalFunctions.saveFile(vid);
+//            users.setFullName(fileName); // Save the file path in the Picture column
+//        }
+
+        userServiceInterface.registerUser(users);
 
         // Prepare response
         response.put("status", "success");
@@ -40,8 +47,6 @@ public class UsersController {
 
         return new ResponseEntity<>(response, HttpStatus.CREATED); // Return 201 Created status
     }
-
-
 
 
 
