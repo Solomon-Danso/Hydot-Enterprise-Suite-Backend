@@ -21,6 +21,8 @@ public class Users {
     private boolean isBlocked;
     private boolean isPasswordReset;
     private String primaryRole;
+    private String token;
+    private LocalDateTime tokenExpiresIn;
 
     @CreationTimestamp
     private LocalDateTime dateCreated;
