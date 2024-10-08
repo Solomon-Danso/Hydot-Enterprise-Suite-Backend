@@ -1,5 +1,6 @@
 package com.hydottech.HES_Backend.Service;
 
+import com.hydottech.HES_Backend.Entity.SecurityManager;
 import com.hydottech.HES_Backend.Entity.Users;
 
 import java.util.List;
@@ -19,4 +20,9 @@ public interface UserServiceInterface {
 
 
     boolean superAdminExists();
+
+    boolean checkPassword(Users user, String password);
+
+
+    List<Users> findByEmail(String email);
 }

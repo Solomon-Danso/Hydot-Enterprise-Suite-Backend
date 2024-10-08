@@ -1,8 +1,11 @@
 package com.hydottech.HES_Backend.Service;
 
+import com.hydottech.HES_Backend.Entity.SecurityManager;
 import com.hydottech.HES_Backend.Entity.Users;
+import com.hydottech.HES_Backend.Repository.SecurityManagerRepo;
 import com.hydottech.HES_Backend.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +15,13 @@ public class UserServiceImplementation implements  UserServiceInterface{
 
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private SecurityManagerRepo securityRepo;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
 
     @Override
     public Users registerUser(Users users) {
@@ -46,7 +56,24 @@ public class UserServiceImplementation implements  UserServiceInterface{
     @Override
     public boolean superAdminExists() {
         return userRepo.existsByPrimaryRole("SuperAdmin");
-    };
+    }
+
+
+    @Override
+    public boolean checkPassword(Users user, String password) {
+        // Compare the raw password with the hashed password stored in the database
+        return passwordEncoder.matches(password, user.getPassword());
+    }
+
+
+
+    @Override
+    public List<Users> findByEmail(String email) {
+        return userRepo.findByEmail(email);
+    }
+
+
+    ;
 
 
 

@@ -42,4 +42,35 @@ public class EmailService {
         // Send the email
         mailSender.send(message);
     }
+
+//    public void sendLoginTokenEmail(String email, String token) {
+//    }
+
+
+    public void sendLoginTokenEmail(String to, String token) throws MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+        // Set mail attributes
+        helper.setTo(to);
+        helper.setSubject("Authentication");
+        helper.setFrom("customers@hydottech.com");
+
+        // Prepare the context with variables
+        Context context = new Context();
+        context.setVariable("token", token);
+        context.setVariable("appName", "HydotTech");
+        context.setVariable("year", String.valueOf(java.time.Year.now()));
+
+        // Load the HTML template
+        String htmlContent = templateEngine.process("loginEmail", context);
+        helper.setText(htmlContent, true);  // Set to true to enable HTML content
+
+        // Send the email
+        mailSender.send(message);
+    }
+
+
+
+
 }
